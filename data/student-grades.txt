@@ -1,0 +1,10 @@
+Ram 7
+Venkat 8
+Ravi 20
+Nila 9
+Peter NA
+Karthi Absent
+Murugan Unknown
+Prasad Yet
+Gayathri 10
+Santhosh 6

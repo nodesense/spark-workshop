@@ -1,0 +1,4 @@
+scala spark kafka
+akka  scala spark
+java  mvn
+scala sbt test

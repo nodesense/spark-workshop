@@ -1,0 +1,15 @@
+id=1234
+name=iPhone
+price=40000
+
+id=1235
+name=Nexus
+price=15000
+
+id=1236
+name=Pixel
+price=45000
+
+id=1237
+name=Moto
+price=12000
