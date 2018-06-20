@@ -62,9 +62,12 @@ lazy val root = (project in file(".")).
      libraryDependencies += "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.9.5",
 
        // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
-       libraryDependencies += "com.fasterxml.jackson.core" % "jackson-databind" % "2.9.5"
+       libraryDependencies += "com.fasterxml.jackson.core" % "jackson-databind" % "2.9.5",
 
-  )
+         // https://mvnrepository.com/artifact/org.jblas/jblas
+         libraryDependencies += "org.jblas" % "jblas" % "1.2.4"
+
+)
 
 
 assemblyMergeStrategy in assembly := {

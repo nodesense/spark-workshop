@@ -69,6 +69,8 @@ object DS12_ProcessBirthData {
     byStateNameDS.show(100)
 
 
+
+
     // Task: Count births by state and year
 
    val byStateYearBirths =  birthdaysDS.groupByKey(bd => (bd.state, bd.year))

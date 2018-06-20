@@ -19,3 +19,6 @@ case class Customer(age: Int,
                     previous: Int,
                     poutcome: String,
                     y: String)
+
+
+ 
