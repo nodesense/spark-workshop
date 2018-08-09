@@ -11,7 +11,7 @@ object ML10_MovieLens extends  App {
 
   val spark = SparkSession.builder()
     .appName("movie-lengs-ml")
-    .master("local")
+    .master("local[8]")
     .getOrCreate()
 
   val sc = spark.sparkContext

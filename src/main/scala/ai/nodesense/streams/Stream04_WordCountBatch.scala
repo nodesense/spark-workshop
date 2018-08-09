@@ -33,9 +33,9 @@ object Stream04_SocketMiniBatch {
     val countDs = wordsDs.groupBy("value").count()
 
 
-    val query = countDs.writeStream.format("console").outputMode(OutputMode.Complete()).trigger(
-      Trigger.ProcessingTime(10, TimeUnit.SECONDS)
-    ).start()
+    val query = countDs.writeStream.format("console")
+      .outputMode(OutputMode.Complete())
+      .trigger(Trigger.ProcessingTime(10, TimeUnit.SECONDS)).start()
 
     query.awaitTermination()
   }

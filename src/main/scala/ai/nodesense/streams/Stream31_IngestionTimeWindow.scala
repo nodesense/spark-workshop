@@ -32,7 +32,7 @@ object IngestionTimeWindow {
 
     val windowedCount = wordsDs
       .groupBy(
-        window($"timestamp", "15 seconds")
+        window($"timestamp", "5 seconds")
       )
       .count()
       .orderBy("window")

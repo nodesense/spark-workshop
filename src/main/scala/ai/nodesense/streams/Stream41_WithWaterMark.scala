@@ -1,12 +1,19 @@
 package ai.nodesense.streams
 
 import java.sql.Timestamp
+import java.text.SimpleDateFormat
+import java.util.Date
 
+import ai.nodesense.streams.Stream32_StockEventTime.dateFormat
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.streaming.OutputMode
 
 object Stream41_WithWaterMark {
+
+
+  val dateFormat:SimpleDateFormat = new SimpleDateFormat(
+    "yyyy-mm-dd");
 
   case class Stock(time: Timestamp, symbol: String, value: Double)
 
@@ -22,14 +29,19 @@ object Stream41_WithWaterMark {
     val socketStreamDs = sparkSession.readStream
       .format("socket")
       .option("host", "localhost")
-      .option("port", 50050)
+      .option("port", 55555)
       .load()
       .as[String]
 
     // read as stock
     val stockDs = socketStreamDs.map(value => {
       val columns = value.split(",")
-      Stock(new Timestamp(columns(0).toLong), columns(1), columns(2).toDouble)
+      val parsedTimeStamp: Date = dateFormat.parse(columns(0));
+
+      val timestamp: Timestamp = new Timestamp(parsedTimeStamp.getTime());
+
+      //Stock(new Timestamp(columns(0).toLong), columns(1), columns(2).toDouble)
+      Stock(timestamp, columns(1), columns(2).toDouble)
     })
 
     val windowedCount = stockDs
