@@ -1,5 +1,10 @@
 # README
 
+Spark examples from workshops. 
+
+For Scala Learning, refer https://github.com/nodesense/scala-workshop
+
+
 ## Source Code
  
  All the source code is located inside src folder
@@ -7,8 +12,18 @@
  
  all the outputs goes into /output directory
  
+ ## Bugs
  
- # To Run Streaming
+  - FileUtils.rmdir not removing files
+  - Please delete the output results folder
+  
+## Windows
+    - Please ensure wintutil.exe in path
+    - https://github.com/steveloughran/winutils
+    - SET ENV HADOOP_HOME for c:\hadoop1.7.x
+    - APPEND PATH with c:\hadoop1.7.x\bin
+    
+ ## To Run Streaming
  
     - Download and install node.js 8.x from https://nodejs.org/en/download/
     
