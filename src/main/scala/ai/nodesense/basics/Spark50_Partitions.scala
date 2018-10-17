@@ -6,16 +6,16 @@ import org.apache.spark.sql.SparkSession
 object  SparkPartitions  extends App {
 
   val spark = SparkSession.builder.
-    master("local[4]").
+    master("local[*]").
     appName("rdd-partitions").
     config("spark.app.id", "rdd-partitions").   // To silence Metrics warning.
     getOrCreate()
 
   val sc = spark.sparkContext
 
-  val prices = List(2, 4, 3, 5, 1, 2, 6, 8, 4, 9, 7)
+  val prices = List(-1, 2, 4, 3, 5, 1, 2, 6, 8, 4, 9, 7, 20)
 
-  val pricesRDD = sc.parallelize(prices)
+  val pricesRDD = sc.parallelize(prices, 2)
 
   println("Num partitions ", pricesRDD.getNumPartitions)
   println("partitioner ", pricesRDD.partitioner)
@@ -26,12 +26,12 @@ object  SparkPartitions  extends App {
 
 
   var rangePartitioner = new RangePartitioner(5, rangeRDD)
-  var hashPartitioner = new HashPartitioner(6);
+  //var hashPartitioner = new HashPartitioner(6);
 
   val results = pricesRDD
               //.map (x => (x, x * 10))
               .map (x => (x, x))
-              //.partitionBy( new HashPartitioner(6) )
+              .partitionBy( new HashPartitioner(6) )
               .partitionBy(rangePartitioner)
               .glom().collect()
 

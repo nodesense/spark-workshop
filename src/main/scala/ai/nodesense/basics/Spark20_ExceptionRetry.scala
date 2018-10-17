@@ -8,7 +8,7 @@ object ExceptionHandling extends App {
 
   val spark = SparkSession
     .builder
-      .master("local[4, 50]") // increase the count local[MAX THREAD, MAX RETRIES]
+      .master("local[4, 20]") // increase the count local[MAX THREAD, MAX RETRIES]
     .appName("ExceptionHandlingTest")
       //.config("spark.rpc.numRetries", 3)
     //.config("rpc.numRetries", 3)
@@ -22,7 +22,7 @@ object ExceptionHandling extends App {
   val results = rdd
                 .map ( i => {
                     val r = math.random
-                    if (r > 0.2) {
+                    if (r > 0.3) {
                       println(s"Throwing exception for $r")
                       throw new Exception(s"Throwing exception for $r")
                     }

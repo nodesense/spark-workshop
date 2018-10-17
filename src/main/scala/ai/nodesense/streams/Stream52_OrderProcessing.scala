@@ -83,21 +83,22 @@ object Stream52_OrderStream {
 
 
     val writerForText = new ForeachWriter[Row] {
-      var fileWriter: FileWriter = _
+     // var fileWriter: FileWriter = _
 
       override def process(value: Row): Unit = {
-        fileWriter.append(value.toSeq.mkString(","))
-        fileWriter.append("\r\n")
+        //fileWriter.append(value.toSeq.mkString(","))
+        println(value.toSeq.mkString(","))
+       // fileWriter.append("\r\n")
       }
 
       override def close(errorOrNull: Throwable): Unit = {
-        fileWriter.close()
+       // fileWriter.close()
       }
 
       override def open(partitionId: Long, version: Long): Boolean = {
         //FileUtils.forceMkdir(new File(s"src/test/resources/${partitionId}"))
-        FileUtils.mkdir(FileUtils.getOutputPath(s"orders/${partitionId}"))
-        fileWriter = new FileWriter(new File(FileUtils.getOutputPath(s"orders/${partitionId}/results.csv")))
+       // FileUtils.mkdir(FileUtils.getOutputPath(s"orders/${partitionId}"))
+        //fileWriter = new FileWriter(new File(FileUtils.getOutputPath(s"orders/${partitionId}/results.csv")))
         true
 
       }
@@ -112,12 +113,13 @@ object Stream52_OrderStream {
                           .foreach(writerForText)
 
 
-    //query.start().awaitTermination()
     query.start()
-
-
-
     writeToCSVQuery.start().awaitTermination()
+
+
+
+
+    query.start().awaitTermination()
     //messageOutput.awaitTermination()
   }
 }

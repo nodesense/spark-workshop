@@ -68,7 +68,19 @@ object Spark03_Fold extends App {
     else Meeting(acc.attendance + meeting.attendance)
   })
 
+
+  val meetings = sc.parallelize(allMeetings);
+
+  val results3 = meetings.fold(Meeting(0)) ((acc, meeting) => {
+    println(s"Meeting $acc, Meeting $meeting")
+    // don't count if attendance is 0 or less
+    if (meeting.attendance <= 0)  acc
+    else Meeting(acc.attendance + meeting.attendance)
+  })
+
   println("Meeting results ", results2)
+
+  println("Meeting Spark results ", results3)
 
   println("Stopping")
   sc.stop()
